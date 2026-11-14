@@ -53,7 +53,7 @@ jobs:
           mkdir -p pbf out
           for a in $AREAS; do
             echo "Descargando $a"
-            curl -fL --retry 3 -o "pbf/$(echo $a | tr '/' '_').osm.pbf" "https://download.geofabrik.de/$a-latest.osm.pbf"
+            curl -fL --retry 8 --retry-all-errors --retry-delay 20 -o "pbf/$(echo $a | tr '/' '_').osm.pbf" "https://download.geofabrik.de/$a-latest.osm.pbf"
           done
           ls -la pbf
           if [ $(ls pbf | wc -l) -gt 1 ]; then
@@ -67,7 +67,7 @@ jobs:
 
       - name: Generar teselas vectoriales (Planetiler, esquema OpenMapTiles)
         run: |
-          curl -fL --retry 3 -o planetiler.jar https://github.com/onthegomap/planetiler/releases/latest/download/planetiler.jar
+          curl -fL --retry 5 --retry-all-errors --retry-delay 10 -o planetiler.jar https://github.com/onthegomap/planetiler/releases/latest/download/planetiler.jar
           HEAP=$(( $(free -m | awk '/^Mem:/{print $2}') * 60 / 100 ))
           java -Xmx${HEAP}m -jar planetiler.jar --osm-path=datos.osm.pbf --download \
             --output=out/$ID.mbtiles --nodemap-type=sparsearray --storage=mmap --force
