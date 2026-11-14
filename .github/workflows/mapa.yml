@@ -1,0 +1,82 @@
+name: Generar mapa
+
+on:
+  workflow_dispatch:
+    inputs:
+      id:
+        description: 'Identificador sin espacios (p. ej. espana)'
+        required: true
+      nombre:
+        description: 'Nombre que verá la app (p. ej. España y Andorra)'
+        required: true
+      areas:
+        description: 'Zonas de Geofabrik separadas por espacios (p. ej. europe/spain europe/andorra)'
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 340
+    env:
+      ID: ${{ inputs.id }}
+      NOMBRE: ${{ inputs.nombre }}
+      AREAS: ${{ inputs.areas }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Liberar espacio en disco
+        run: |
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /opt/hostedtoolcache/CodeQL /usr/local/share/boost || true
+          df -h / ; free -g ; nproc
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - name: Descargar datos de OpenStreetMap (Geofabrik)
+        run: |
+          mkdir -p pbf out
+          for a in $AREAS; do
+            echo "Descargando $a"
+            curl -fL --retry 3 -o "pbf/$(echo $a | tr '/' '_').osm.pbf" "https://download.geofabrik.de/$a-latest.osm.pbf"
+          done
+          ls -la pbf
+          if [ $(ls pbf | wc -l) -gt 1 ]; then
+            sudo apt-get update -qq && sudo apt-get install -y -qq osmium-tool
+            osmium merge pbf/*.osm.pbf -o datos.osm.pbf
+            rm -rf pbf
+          else
+            mv pbf/*.osm.pbf datos.osm.pbf
+          fi
+          ls -la datos.osm.pbf
+
+      - name: Generar teselas vectoriales (Planetiler, esquema OpenMapTiles)
+        run: |
+          curl -fL --retry 3 -o planetiler.jar https://github.com/onthegomap/planetiler/releases/latest/download/planetiler.jar
+          HEAP=$(( $(free -m | awk '/^Mem:/{print $2}') * 60 / 100 ))
+          java -Xmx${HEAP}m -jar planetiler.jar --osm-path=datos.osm.pbf --download \
+            --output=out/$ID.mbtiles --nodemap-type=sparsearray --storage=mmap --force
+          ls -la out
+
+      - name: Partir en trozos y crear el índice
+        run: |
+          cd out
+          BOUNDS=$(sqlite3 $ID.mbtiles "select value from metadata where name='bounds'")
+          BYTES=$(stat -c %s $ID.mbtiles)
+          split -b 1900M -d -a 2 $ID.mbtiles $ID.mbtiles.part
+          rm $ID.mbtiles
+          BOUNDS="$BOUNDS" BYTES="$BYTES" python3 ../scripts/indice.py
+          ls -la
+
+      - name: Publicar en Releases
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release view mapas >/dev/null 2>&1 || gh release create mapas --title "Mapas sin conexión" --notes "Mapas de OpenStreetMap para la app Moto Rutas. © colaboradores de OpenStreetMap (ODbL)."
+          # Quita los trozos de una versión anterior de este mismo mapa
+          gh release view mapas --json assets -q '.assets[].name' | grep -E "^$ID\.(mbtiles\.part[0-9]+|json)$" | xargs -r -n1 gh release delete-asset mapas -y || true
+          gh release upload mapas out/$ID.mbtiles.part* out/$ID.json --clobber
