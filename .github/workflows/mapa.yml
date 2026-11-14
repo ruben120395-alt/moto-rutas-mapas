@@ -53,7 +53,7 @@ jobs:
           mkdir -p pbf out
           for a in $AREAS; do
             echo "Descargando $a"
-            curl -fL --retry 8 --retry-all-errors --retry-delay 20 -o "pbf/$(echo $a | tr '/' '_').osm.pbf" "https://download.geofabrik.de/$a-latest.osm.pbf"
+            curl -fL --retry 10 --retry-all-errors --retry-delay 60 -o "pbf/$(echo $a | tr '/' '_').osm.pbf" "https://download.geofabrik.de/$a-latest.osm.pbf"
           done
           ls -la pbf
           if [ $(ls pbf | wc -l) -gt 1 ]; then
