@@ -12,6 +12,17 @@ on:
       areas:
         description: 'Zonas de Geofabrik separadas por espacios (p. ej. europe/spain europe/andorra)'
         required: true
+  workflow_call:
+    inputs:
+      id:
+        type: string
+        required: true
+      nombre:
+        type: string
+        required: true
+      areas:
+        type: string
+        required: true
 
 permissions:
   contents: write

@@ -1,0 +1,52 @@
+[
+ {
+  "id": "espana",
+  "nombre": "España y Andorra",
+  "areas": "europe/spain europe/andorra"
+ },
+ {
+  "id": "andorra",
+  "nombre": "Andorra",
+  "areas": "europe/andorra"
+ },
+ {
+  "id": "portugal",
+  "nombre": "Portugal",
+  "areas": "europe/portugal"
+ },
+ {
+  "id": "francia-sur",
+  "nombre": "Francia: Pirineos y sur (Aquitania, Midi-Pyrénées, Languedoc)",
+  "areas": "europe/france/aquitaine europe/france/midi-pyrenees europe/france/languedoc-roussillon"
+ },
+ {
+  "id": "francia-alpes",
+  "nombre": "Francia: Alpes y Provenza",
+  "areas": "europe/france/rhone-alpes europe/france/provence-alpes-cote-d-azur"
+ },
+ {
+  "id": "francia",
+  "nombre": "Francia entera",
+  "areas": "europe/france"
+ },
+ {
+  "id": "italia",
+  "nombre": "Italia",
+  "areas": "europe/italy"
+ },
+ {
+  "id": "suiza",
+  "nombre": "Suiza",
+  "areas": "europe/switzerland"
+ },
+ {
+  "id": "austria",
+  "nombre": "Austria",
+  "areas": "europe/austria"
+ },
+ {
+  "id": "marruecos",
+  "nombre": "Marruecos",
+  "areas": "africa/morocco"
+ }
+]

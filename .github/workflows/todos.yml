@@ -1,0 +1,47 @@
+name: Generar todos los mapas
+
+# Regenera todos los mapas de mapas.json con datos nuevos de OpenStreetMap.
+# Se lanza a mano (se puede elegir solo algunos) y el día 1 de cada mes.
+on:
+  workflow_dispatch:
+    inputs:
+      solo:
+        description: 'Solo estos identificadores, separados por espacios (vacío = todos)'
+        required: false
+        default: ''
+  schedule:
+    - cron: '17 3 1 * *'
+
+permissions:
+  contents: write
+
+jobs:
+  lista:
+    runs-on: ubuntu-latest
+    outputs:
+      mapas: ${{ steps.leer.outputs.mapas }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: leer
+        env:
+          SOLO: ${{ inputs.solo }}
+        run: |
+          python3 - <<'PY' >> "$GITHUB_OUTPUT"
+          import json, os
+          solo = os.environ.get("SOLO", "").split()
+          mapas = [m for m in json.load(open("mapas.json")) if not solo or m["id"] in solo]
+          print("mapas=" + json.dumps(mapas, ensure_ascii=False))
+          PY
+
+  generar:
+    needs: lista
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        mapa: ${{ fromJSON(needs.lista.outputs.mapas) }}
+    uses: ./.github/workflows/mapa.yml
+    with:
+      id: ${{ matrix.mapa.id }}
+      nombre: ${{ matrix.mapa.nombre }}
+      areas: ${{ matrix.mapa.areas }}

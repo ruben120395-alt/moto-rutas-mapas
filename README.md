@@ -6,4 +6,5 @@ con [Planetiler](https://github.com/onthegomap/planetiler) y el esquema OpenMapT
 
 
 Los archivos están en **Releases → mapas**. Para generar o actualizar un mapa:
-pestaña **Actions → Generar mapa → Run workflow**.
+pestaña **Actions → Generar todos los mapas → Run workflow** (la lista está en `mapas.json`).
+Se regeneran solos el día 1 de cada mes.
