@@ -21,8 +21,8 @@
  },
  {
   "id": "francia-alpes",
-  "nombre": "Francia: Alpes y Provenza",
-  "areas": "europe/france/rhone-alpes europe/france/provence-alpes-cote-d-azur"
+  "nombre": "Francia: Alpes, Provenza y Mónaco",
+  "areas": "europe/france/rhone-alpes europe/france/provence-alpes-cote-d-azur europe/monaco"
  },
  {
   "id": "francia",
@@ -36,8 +36,8 @@
  },
  {
   "id": "suiza",
-  "nombre": "Suiza",
-  "areas": "europe/switzerland"
+  "nombre": "Suiza y Liechtenstein",
+  "areas": "europe/switzerland europe/liechtenstein"
  },
  {
   "id": "austria",
@@ -48,5 +48,185 @@
   "id": "marruecos",
   "nombre": "Marruecos",
   "areas": "africa/morocco"
+ },
+ {
+  "id": "canarias",
+  "nombre": "Canarias",
+  "areas": "africa/canary-islands"
+ },
+ {
+  "id": "azores",
+  "nombre": "Azores",
+  "areas": "europe/azores"
+ },
+ {
+  "id": "alemania",
+  "nombre": "Alemania",
+  "areas": "europe/germany"
+ },
+ {
+  "id": "reino-unido",
+  "nombre": "Gran Bretaña",
+  "areas": "europe/great-britain"
+ },
+ {
+  "id": "irlanda",
+  "nombre": "Irlanda e Irlanda del Norte",
+  "areas": "europe/ireland-and-northern-ireland"
+ },
+ {
+  "id": "belgica",
+  "nombre": "Bélgica",
+  "areas": "europe/belgium"
+ },
+ {
+  "id": "paises-bajos",
+  "nombre": "Países Bajos",
+  "areas": "europe/netherlands"
+ },
+ {
+  "id": "luxemburgo",
+  "nombre": "Luxemburgo",
+  "areas": "europe/luxembourg"
+ },
+ {
+  "id": "dinamarca",
+  "nombre": "Dinamarca",
+  "areas": "europe/denmark"
+ },
+ {
+  "id": "noruega",
+  "nombre": "Noruega",
+  "areas": "europe/norway"
+ },
+ {
+  "id": "suecia",
+  "nombre": "Suecia",
+  "areas": "europe/sweden"
+ },
+ {
+  "id": "finlandia",
+  "nombre": "Finlandia",
+  "areas": "europe/finland"
+ },
+ {
+  "id": "islandia",
+  "nombre": "Islandia",
+  "areas": "europe/iceland"
+ },
+ {
+  "id": "estonia",
+  "nombre": "Estonia",
+  "areas": "europe/estonia"
+ },
+ {
+  "id": "letonia",
+  "nombre": "Letonia",
+  "areas": "europe/latvia"
+ },
+ {
+  "id": "lituania",
+  "nombre": "Lituania",
+  "areas": "europe/lithuania"
+ },
+ {
+  "id": "polonia",
+  "nombre": "Polonia",
+  "areas": "europe/poland"
+ },
+ {
+  "id": "chequia",
+  "nombre": "Chequia",
+  "areas": "europe/czech-republic"
+ },
+ {
+  "id": "eslovaquia",
+  "nombre": "Eslovaquia",
+  "areas": "europe/slovakia"
+ },
+ {
+  "id": "hungria",
+  "nombre": "Hungría",
+  "areas": "europe/hungary"
+ },
+ {
+  "id": "eslovenia",
+  "nombre": "Eslovenia",
+  "areas": "europe/slovenia"
+ },
+ {
+  "id": "croacia",
+  "nombre": "Croacia",
+  "areas": "europe/croatia"
+ },
+ {
+  "id": "bosnia",
+  "nombre": "Bosnia y Herzegovina",
+  "areas": "europe/bosnia-herzegovina"
+ },
+ {
+  "id": "serbia",
+  "nombre": "Serbia",
+  "areas": "europe/serbia"
+ },
+ {
+  "id": "montenegro",
+  "nombre": "Montenegro",
+  "areas": "europe/montenegro"
+ },
+ {
+  "id": "kosovo",
+  "nombre": "Kosovo",
+  "areas": "europe/kosovo"
+ },
+ {
+  "id": "macedonia",
+  "nombre": "Macedonia del Norte",
+  "areas": "europe/macedonia"
+ },
+ {
+  "id": "albania",
+  "nombre": "Albania",
+  "areas": "europe/albania"
+ },
+ {
+  "id": "grecia",
+  "nombre": "Grecia",
+  "areas": "europe/greece"
+ },
+ {
+  "id": "bulgaria",
+  "nombre": "Bulgaria",
+  "areas": "europe/bulgaria"
+ },
+ {
+  "id": "rumania",
+  "nombre": "Rumanía",
+  "areas": "europe/romania"
+ },
+ {
+  "id": "moldavia",
+  "nombre": "Moldavia",
+  "areas": "europe/moldova"
+ },
+ {
+  "id": "ucrania",
+  "nombre": "Ucrania",
+  "areas": "europe/ukraine"
+ },
+ {
+  "id": "turquia",
+  "nombre": "Turquía",
+  "areas": "europe/turkey"
+ },
+ {
+  "id": "chipre",
+  "nombre": "Chipre",
+  "areas": "europe/cyprus"
+ },
+ {
+  "id": "malta",
+  "nombre": "Malta",
+  "areas": "europe/malta"
  }
 ]
